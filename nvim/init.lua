@@ -105,10 +105,10 @@ vim.o.number = true
 vim.o.relativenumber = true
 
 -- Set tab and indentation to 4 spaces
-vim.o.tabstop = 4        -- Width of a tab character
-vim.o.shiftwidth = 4     -- Size of indentation
-vim.o.softtabstop = 4    -- Number of spaces inserted when pressing Tab
-vim.o.expandtab = true   -- Convert tabs to spaces
+vim.o.tabstop = 4 -- Width of a tab character
+vim.o.shiftwidth = 4 -- Size of indentation
+vim.o.softtabstop = 4 -- Number of spaces inserted when pressing Tab
+vim.o.expandtab = true -- Convert tabs to spaces
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -724,10 +724,13 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        'stylua',
         'prettierd',
         'prettier',
+        'black',
+        'isort',
       })
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -736,10 +739,15 @@ require('lazy').setup({
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
+
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+
+            -- Disable LSP formatting if Conform handles it
+            if server_name == 'ts_ls' or server_name == 'pyright' then
+              server.capabilities.documentFormattingProvider = false
+              server.capabilities.documentRangeFormattingProvider = false
+            end
+
             require('lspconfig')[server_name].setup(server)
           end,
         },
@@ -749,7 +757,7 @@ require('lazy').setup({
 
   { -- Autoformat
     'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
+    event = { 'BufReadPre', 'BufNewFile' },
     cmd = { 'ConformInfo' },
     keys = {
       {
@@ -787,6 +795,9 @@ require('lazy').setup({
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+
+        json = { 'prettierd', 'prettier', stop_after_first = true },
+        jsonc = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -974,8 +985,24 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
-      -- Autoinstall languages that are not installed
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'css',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'python',
+        'javascript',
+        'typescript',
+        'svelte',
+        'query',
+        'vim',
+        'vimdoc',
+      },
       auto_install = true,
       highlight = {
         enable = true,
