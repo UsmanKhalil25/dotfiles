@@ -105,9 +105,9 @@ vim.o.number = true
 vim.o.relativenumber = true
 
 -- Set tab and indentation to 4 spaces
-vim.o.tabstop = 4 -- Width of a tab character
-vim.o.shiftwidth = 4 -- Size of indentation
-vim.o.softtabstop = 4 -- Number of spaces inserted when pressing Tab
+vim.o.tabstop = 2 -- Width of a tab character
+vim.o.shiftwidth = 2 -- Size of indentation
+vim.o.softtabstop = 2 -- Number of spaces inserted when pressing Tab
 vim.o.expandtab = true -- Convert tabs to spaces
 
 -- Enable mouse mode, can be useful for resizing splits for example!
