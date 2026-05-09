@@ -1,0 +1,54 @@
+{
+  "language_models": {
+    "opencode": {
+      "show_free_models": false,
+      "show_zen_models": false
+    }
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "vim_mode": true,
+  "theme": "Vercel Dark",
+
+  "relative_line_numbers": "enabled",
+
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_project_items": false,
+    "show_user_menu": false,
+  },
+  "tab_bar": {
+    "show": false,
+  },
+  "toolbar": {
+    "quick_actions": false,
+  },
+  "status_bar": {
+    "experimental.show": false,
+  },
+
+  "project_panel": {
+    "dock": "right",
+    "default_width": 400,
+    "auto_fold_dirs": false,
+    "starts_open": false,
+    "git_status": false,
+  },
+  "file_finder": {
+    "modal_max_width": "medium",
+  },
+
+  "ui_font_family": "JetBrains Mono",
+  "ui_font_size": 18,
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_size": 18,
+
+  "agent_buffer_font_size": 18,
+
+  "git_panel": {
+    "dock": "right"
+  }
+}
