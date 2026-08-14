@@ -1,0 +1,6 @@
+agent/auth.json
+agent/trust.json
+agent/sessions/
+agent/npm/
+agent/web-search.json
+agent/*.backup.*

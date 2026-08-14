@@ -1,0 +1,21 @@
+{
+  "theme": "dark",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "gpt-5.6-luna",
+  "defaultThinkingLevel": "high",
+  "packages": [
+    "npm:pi-web-access@0.22.0",
+    "npm:pi-agent-modes@0.3.0",
+    "npm:@pi-extensions/pi-statusline@0.2.0"
+  ],
+  "compaction": {
+    "enabled": false
+  },
+  "hideThinkingBlock": false,
+  "editorPaddingX": 0,
+  "outputPad": 1,
+  "defaultProjectTrust": "ask",
+  "tuiMode": "regular",
+  "fullscreenExitOutput": "transcript",
+  "fullscreenScrollbar": "auto"
+}

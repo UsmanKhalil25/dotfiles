@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "usageEnabled": false,
+  "sessionName": true,
+  "tps": false,
+  "ttft": false
+}
