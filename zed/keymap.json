@@ -1,151 +1,57 @@
-// ~/.config/zed/keymap.json
-//
-// Zed's default vim bindings differ from Neovim's (e.g. Zed uses `g d`, `g y`,
-// `g I`, `g .`, `c d` by default). The bindings below override those to match
-// the kickstart.nvim layout exactly.
-//
-// Key sequence syntax:
-//   - Multi-key sequences are space-separated:  "g r n"  means g → r → n
-//   - Uppercase letters use the shift- prefix:  "g shift-o"  means gO
-//   - Leader (<Space>) is written as "space"
 [
-  // ══════════════════════════════════════════════════════════════════════
-  // Normal mode — Editor only
-  // Context must be at the Editor level; "Workspace && vim_mode == normal"
-  // never matches because vim_mode is set at the Editor level.
-  // ══════════════════════════════════════════════════════════════════════
   {
     "context": "Editor && vim_mode == normal && !menu",
     "bindings": {
-      // ── Window / pane navigation (between editor splits) ──────────────
-      // Matches: <C-h/j/k/l> → <C-w><C-h/j/k/l>
-      // Note: ctrl-h/l also work from panels back to editor (see below).
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-
-      // ── Clear search highlights ───────────────────────────────────────
-      "escape": "editor::Cancel",
-
-      // ── <leader>q  → diagnostic list ─────────────────────────────────
-      "space q": "diagnostics::Deploy",
-
-      // ── <leader>f  → format buffer ────────────────────────────────────
-      "space f": "editor::Format",
-
-      // ── <leader>/  → fuzzy search in current buffer ───────────────────
-      "space /": "buffer_search::Deploy",
-
-      // ── <leader><leader>  → tab/buffer switcher ───────────────────────
-      "space space": "tab_switcher::Toggle",
-
-      // ── <leader>s*  Search ────────────────────────────────────────────
-      "space s f": "file_finder::Toggle",
+      "space e": "project_panel::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space space": "file_finder::Toggle",
       "space s g": "pane::DeploySearch",
-      "space s w": "pane::DeploySearch",
-      "space s d": "diagnostics::Deploy",
-      "space s .": "projects::OpenRecent",
-      "space s n": "zed::OpenSettings",
-
-      // ── <leader>t*  Toggle ────────────────────────────────────────────
-      "space t h": "editor::ToggleInlayHints",
-
-      // ── LSP keymaps ───────────────────────────────────────────────────
-      // Matches kickstart.nvim LspAttach bindings exactly.
-      // Overrides Zed's vim defaults (gd, gy, gI, cd, g., gs, gS).
-      "g r n": "editor::Rename",
-      "g r r": "editor::FindAllReferences",
-      "g r i": "editor::GoToImplementation",
-      "g r d": "editor::GoToDefinition",
-      "g r shift-d": "editor::GoToDeclaration",
-      "g r t": "editor::GoToTypeDefinition",
-      "g shift-o": "outline::Toggle",
-      "g shift-w": "project_symbols::Toggle"
-    }
-  },
-
-  // ══════════════════════════════════════════════════════════════════════
-  // Normal AND visual mode
-  // ══════════════════════════════════════════════════════════════════════
-  {
-    "context": "VimControl && !menu",
-    "bindings": {
-      // gra → code action (works in normal + visual, matching kickstart's { "n", "x" })
-      "g r a": "editor::ToggleCodeActions"
-    }
-  },
-
-  // ══════════════════════════════════════════════════════════════════════
-  // Panel toggles — Workspace context fires from anywhere in Zed
-  //
-  // ctrl-a → agent panel (left dock)
-  // ctrl-e → explorer panel (right dock)
-  // ══════════════════════════════════════════════════════════════════════
-  {
-    "context": "Workspace",
-    "bindings": {
-      "ctrl-a": "workspace::ToggleLeftDock",
-      "ctrl-e": "project_panel::ToggleFocus",
-      "ctrl-g": "git_panel::ToggleFocus"
-    }
-  },
-
-  // ── Override vim ctrl-e/a scroll bindings ──────────────────────────────
-  {
-    "context": "Editor",
-    "bindings": {
-      "ctrl-a": "workspace::ToggleLeftDock",
-      "ctrl-e": "project_panel::ToggleFocus",
-      "ctrl-g": "git_panel::ToggleFocus"
-    }
-  },
-
-  // ── Completion menu ─────────────────────────────────────────────────────
-  {
-    "context": "Editor && showing_completions",
-    "bindings": {
-      "ctrl-y": "editor::ConfirmCompletion"
-    }
-  },
-
-  // ── Agent panel (left dock) ───────────────────────────────────────────
-  {
-    "context": "AgentPanel",
-    "bindings": {
-      "ctrl-a": "workspace::ToggleLeftDock",
+      "space g g": "git_panel::Toggle",
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight"
     }
   },
-
-  // ── Project panel (right dock) ────────────────────────────────────────
   {
-    "context": "ProjectPanel",
+    "context": "Workspace",
     "bindings": {
-      "ctrl-e": "workspace::ToggleRightDock",
-      "ctrl-g": "git_panel::ToggleFocus",
-      "ctrl-h": "workspace::ActivatePaneLeft"
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight"
     }
   },
-
-  // ── Git panel (right dock) ───────────────────────────────────────────
-  {
-    "context": "GitPanel",
-    "bindings": {
-      "ctrl-g": "workspace::ToggleRightDock",
-      "ctrl-e": "project_panel::ToggleFocus",
-      "ctrl-h": "workspace::ActivatePaneLeft"
-    }
-  },
-
-  // ══════════════════════════════════════════════════════════════════════
-  // Empty pane / no editor open
-  // ══════════════════════════════════════════════════════════════════════
   {
     "context": "EmptyPane || SharedScreen",
     "bindings": {
-      "space s f": "file_finder::Toggle",
-      "space s g": "pane::DeploySearch"
+      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space s g": "pane::DeploySearch",
+      "space e": "project_panel::Toggle",
+      "space g g": "git_panel::Toggle"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Trash",
+      "space e": "project_panel::Toggle",
+      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space g g": "git_panel::Toggle"
+    }
+  },
+  {
+    "context": "GitPanel && ChangesList",
+    "bindings": {
+      "space": "git::ToggleStaged",
+      "a": "git::StageAll",
+      "shift-a": "git::UnstageAll",
+      "c": "git::Commit",
+      "p": "git::Pull",
+      "shift-p": "git::Push",
+      "d": "git::RestoreFile"
     }
   }
 ]
