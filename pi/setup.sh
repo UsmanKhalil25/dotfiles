@@ -12,7 +12,7 @@ if ! command -v pi >/dev/null 2>&1; then
   exit 1
 fi
 
-mkdir -p "$PI_AGENT_DIR"
+mkdir -p "$PI_AGENT_DIR" "$PI_AGENT_DIR/extensions" "$PI_AGENT_DIR/agents"
 
 copy_config() {
   local source="$1"
@@ -35,11 +35,21 @@ copy_config() {
 copy_config "$REPO_ROOT/pi/agent/settings.json" "$PI_AGENT_DIR/settings.json"
 copy_config "$REPO_ROOT/pi/agent/modes.config.json" "$PI_AGENT_DIR/modes.config.json"
 copy_config "$REPO_ROOT/pi/agent/statusline.json" "$PI_AGENT_DIR/statusline.json"
+copy_config "$REPO_ROOT/pi/agent/APPEND_SYSTEM.md" "$PI_AGENT_DIR/APPEND_SYSTEM.md"
+copy_config "$REPO_ROOT/pi/agent/plan-artifacts.json" "$PI_AGENT_DIR/plan-artifacts.json"
+copy_config "$REPO_ROOT/pi/agent/extensions/plan-artifacts.ts" "$PI_AGENT_DIR/extensions/plan-artifacts.ts"
+copy_config "$REPO_ROOT/pi/agent/plan-artifacts-lib.ts" "$PI_AGENT_DIR/plan-artifacts-lib.ts"
+# Remove the helper's old auto-discovered location from earlier revisions.
+if [ -f "$PI_AGENT_DIR/extensions/plan-artifacts-lib.ts" ]; then
+  rm "$PI_AGENT_DIR/extensions/plan-artifacts-lib.ts"
+fi
+copy_config "$REPO_ROOT/pi/agent/agents/plan-worker.md" "$PI_AGENT_DIR/agents/plan-worker.md"
 
 packages=(
   'npm:pi-web-access@0.22.0'
   'npm:pi-agent-modes@0.3.0'
-  'npm:@pi-extensions/pi-statusline@0.2.0'
+  'npm:@pi-extensions/pi-statusline@0.1.3'
+  'npm:pi-subagents@0.49.0'
 )
 
 for package in "${packages[@]}"; do

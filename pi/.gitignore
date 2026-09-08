@@ -3,4 +3,5 @@ agent/trust.json
 agent/sessions/
 agent/npm/
 agent/web-search.json
+agent/models-store.json
 agent/*.backup.*

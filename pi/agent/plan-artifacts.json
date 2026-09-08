@@ -1,0 +1,9 @@
+{
+  "plansDir": ".plans",
+  "recentContextLimit": 5,
+  "contextPreviewChars": 2400,
+  "preserveRevisions": true,
+  "suppressPlanTransition": true,
+  "hidePlanProgress": true,
+  "rpcTimeoutMs": 10000
+}
