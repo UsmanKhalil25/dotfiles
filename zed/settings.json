@@ -90,6 +90,14 @@
 
   },
   "vim_mode": true,
+  "vim": {
+    "cursor_shape": {
+      "normal": "block",
+      "visual": "block",
+      "replace": "block",
+      "insert": "bar"
+    }
+  },
   "relative_line_numbers": "enabled",
   "cursor_shape": "block",
   "ui_font_family": "JetBrainsMono Nerd Font",
