@@ -2,11 +2,11 @@
   {
     "context": "Editor && vim_mode == normal && !menu",
     "bindings": {
-      "space e": "project_panel::Toggle",
+      "space e": "workspace::ToggleRightDock",
       "space f f": "file_finder::Toggle",
       "space space": "file_finder::Toggle",
       "space s g": "pane::DeploySearch",
-      "space g g": "git_panel::Toggle",
+      "space g g": "workspace::ToggleLeftDock",
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
       "ctrl-h": "workspace::ActivatePaneLeft",
@@ -26,8 +26,8 @@
       "space space": "file_finder::Toggle",
       "space f f": "file_finder::Toggle",
       "space s g": "pane::DeploySearch",
-      "space e": "project_panel::Toggle",
-      "space g g": "git_panel::Toggle"
+      "space e": "workspace::ToggleRightDock",
+      "space g g": "workspace::ToggleLeftDock"
     }
   },
   {
@@ -36,10 +36,10 @@
       "a": "project_panel::NewFile",
       "r": "project_panel::Rename",
       "d": "project_panel::Trash",
-      "space e": "project_panel::Toggle",
+      "space e": "workspace::ToggleRightDock",
       "space space": "file_finder::Toggle",
       "space f f": "file_finder::Toggle",
-      "space g g": "git_panel::Toggle"
+      "space g g": "workspace::ToggleLeftDock"
     }
   },
   {
@@ -51,7 +51,8 @@
       "c": "git::Commit",
       "p": "git::Pull",
       "shift-p": "git::Push",
-      "d": "git::RestoreFile"
+      "d": "git::RestoreFile",
+      "q": "workspace::ToggleLeftDock"
     }
   }
 ]
